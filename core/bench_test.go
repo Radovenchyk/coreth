@@ -256,7 +256,7 @@ func makeChainForBench(db ethdb.Database, genesis *Genesis, full bool, count uin
 
 		if full || n == 0 {
 			block := types.NewBlockWithHeader(header)
-			rawdb.WriteBody(db, hash, n, block.Body())
+			rawdb.WriteBody(db, hash, n, types.BlockBody(block))
 			rawdb.WriteReceipts(db, hash, n, nil)
 		}
 	}

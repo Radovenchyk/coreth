@@ -161,7 +161,7 @@ func BenchmarkHashing(b *testing.B) {
 	)
 	{
 		block := getBlock(200, 2, 50)
-		bodyRlp, _ = rlp.EncodeToBytes(block.Body())
+		bodyRlp, _ = rlp.EncodeToBytes(types.BlockBody(block))
 		blockRlp, _ = rlp.EncodeToBytes(block)
 	}
 	var got common.Hash

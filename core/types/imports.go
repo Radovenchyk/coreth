@@ -26,6 +26,8 @@ type (
 	StateAccount      = ethtypes.StateAccount
 	SlimAccount       = ethtypes.SlimAccount
 	Header            = ethtypes.Header
+	Block             = ethtypes.Block
+	Blocks            = ethtypes.Blocks
 	BlockNonce        = ethtypes.BlockNonce
 	Transaction       = ethtypes.Transaction
 	Transactions      = ethtypes.Transactions
@@ -60,6 +62,10 @@ var (
 	SlimAccountRLP       = ethtypes.SlimAccountRLP
 	FullAccount          = ethtypes.FullAccount
 	FullAccountRLP       = ethtypes.FullAccountRLP
+	CalcUncleHash        = ethtypes.CalcUncleHash
+	NewBlock             = ethtypes.NewBlock
+	NewBlockWithHeader   = ethtypes.NewBlockWithHeader
+	CopyHeader           = ethtypes.CopyHeader
 
 	// Signers
 	NewEIP155Signer        = ethtypes.NewEIP155Signer

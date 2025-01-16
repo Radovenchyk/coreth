@@ -522,12 +522,14 @@ func ReadBlock(db ethdb.Reader, hash common.Hash, number uint64) *types.Block {
 	if body == nil {
 		return nil
 	}
-	return types.NewBlockWithHeader(header).WithBody(body.Transactions, body.Uncles).WithExtData(body.Version, body.ExtData)
+	block := types.NewBlockWithHeader(header).WithBody(body.Transactions, body.Uncles)
+	block = types.BlockWithExtData(block, body.Version, body.ExtData)
+	return block
 }
 
 // WriteBlock serializes a block into the database, header and body separately.
 func WriteBlock(db ethdb.KeyValueWriter, block *types.Block) {
-	WriteBody(db, block.Hash(), block.NumberU64(), block.Body())
+	WriteBody(db, block.Hash(), block.NumberU64(), types.BlockBody(block))
 	WriteHeader(db, block.Header())
 }
 

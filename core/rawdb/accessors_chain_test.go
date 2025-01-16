@@ -138,7 +138,7 @@ func TestBlockStorage(t *testing.T) {
 	if entry := ReadBody(db, block.Hash(), block.NumberU64()); entry == nil {
 		t.Fatalf("Stored body not found")
 	} else if types.DeriveSha(types.Transactions(entry.Transactions), newTestHasher()) != types.DeriveSha(block.Transactions(), newTestHasher()) || types.CalcUncleHash(entry.Uncles) != types.CalcUncleHash(block.Uncles()) {
-		t.Fatalf("Retrieved body mismatch: have %v, want %v", entry, block.Body())
+		t.Fatalf("Retrieved body mismatch: have %v, want %v", entry, types.BlockBody(block))
 	}
 	// Delete the block and verify the execution
 	DeleteBlock(db, block.Hash(), block.NumberU64())
@@ -170,7 +170,7 @@ func TestPartialBlockStorage(t *testing.T) {
 	DeleteHeader(db, block.Hash(), block.NumberU64())
 
 	// Store a body and check that it's not recognized as a block
-	WriteBody(db, block.Hash(), block.NumberU64(), block.Body())
+	WriteBody(db, block.Hash(), block.NumberU64(), types.BlockBody(block))
 	if entry := ReadBlock(db, block.Hash(), block.NumberU64()); entry != nil {
 		t.Fatalf("Non existent block returned: %v", entry)
 	}
@@ -178,7 +178,7 @@ func TestPartialBlockStorage(t *testing.T) {
 
 	// Store a header and a body separately and check reassembly
 	WriteHeader(db, block.Header())
-	WriteBody(db, block.Hash(), block.NumberU64(), block.Body())
+	WriteBody(db, block.Hash(), block.NumberU64(), types.BlockBody(block))
 
 	if entry := ReadBlock(db, block.Hash(), block.NumberU64()); entry == nil {
 		t.Fatalf("Stored block not found")
