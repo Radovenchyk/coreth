@@ -136,4 +136,4 @@ require (
 	rsc.io/tmplfunc v0.0.3 // indirect
 )
 
-replace github.com/ava-labs/libevm => github.com/ava-labs/libevm v0.0.0-20250116120922-5227c55beea5
+replace github.com/ava-labs/libevm => github.com/ava-labs/libevm v0.0.0-20250117134600-dc9e4f85990e

@@ -13,6 +13,7 @@ var (
 	extras = ethtypes.RegisterExtras[
 		HeaderExtra, *HeaderExtra,
 		BlockExtra, *BlockExtra,
+		BodyExtra, *BodyExtra,
 		isMultiCoin]()
 	IsMultiCoinPayloads = extras.StateAccount
 )
